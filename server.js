@@ -130,8 +130,15 @@ const data =  [
 app.use(express.json());
 app.use(cors())
 app.get('/', (req, res) => {
-    res.send(data)
-    });
+  res.send(data)
+});
+
+app.get(`/find/:typ`, (req,res) => {
+  const veg = data.filter(el => el.typ===req.params.typ)
+  res.send(veg)
+})
+
+app.get("*", (req,res) => res.send('Sorry nix zu sehen'))
 
 const PORT = process.env.PORT || 5000
 
